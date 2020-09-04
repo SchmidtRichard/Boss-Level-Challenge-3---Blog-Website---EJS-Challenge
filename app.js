@@ -26,8 +26,19 @@ app.use(express.static("public"));
 app.get("/", function(req, res) {
 
   //Render the home.ejs file (page)
-  res.render("home");
+  res.render("home", {
+
+    //Render the text of the const homeStartingContent in the paragraph tag inside the home.ejs
+    startingContent: homeStartingContent
+  });
 });
+
+
+
+
+
+
+
 //Set up the server to listen to port 3000
 app.listen(3000, function() {
   console.log("Server started on port 3000");
