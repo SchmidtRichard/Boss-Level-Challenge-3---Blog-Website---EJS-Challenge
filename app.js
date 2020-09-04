@@ -33,6 +33,26 @@ app.get("/", function(req, res) {
   });
 });
 
+//Create the route to the about.ejs page
+app.get("/about", function(req, res) {
+
+  //Render the about.ejs file (page)
+  res.render("about", {
+    //Render the text of the const aboutContent in the paragraph tag inside the about.ejs
+    aboutText: aboutContent
+  });
+});
+
+//Create the route to the contact.ejs page
+app.get("/contact", function(req, res) {
+
+  //Render the contact.ejs file (page)
+  res.render("contact", {
+    //Render the text of the const contactContent in the paragraph tag inside the contact.ejs
+    contactText: contactContent
+  });
+});
+
 
 
 
