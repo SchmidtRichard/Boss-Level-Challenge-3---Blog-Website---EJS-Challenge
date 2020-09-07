@@ -53,12 +53,12 @@ app.get("/contact", function(req, res) {
   });
 });
 
+//Create the route to the compose.ejs page
+app.get("/compose", function(req, res) {
 
-
-
-
-
-
+  //Render the compose.ejs file (page)
+  res.render("compose");
+});
 
 //Set up the server to listen to port 3000
 app.listen(3000, function() {
