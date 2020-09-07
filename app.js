@@ -60,6 +60,13 @@ app.get("/compose", function(req, res) {
   res.render("compose");
 });
 
+//Catch the POST request made to the compose.ejs route
+app.post("/compose", function(req, res) {
+
+  //Log what has been entered in the title input in compose.ejs
+  console.log(req.body.postTitle);
+});
+
 //Set up the server to listen to port 3000
 app.listen(3000, function() {
   console.log("Server started on port 3000");

@@ -2,8 +2,11 @@
 <%- include("partials/header"); -%>
 
 <h1>Compose</h1>
-<input type="text" name="" autofocus>
-<button type="button" name="button"> Publish</button>
+
+<form class="createPost" action="/compose" method="post">
+  <input type="text" name="postTitle" autofocus>
+  <button type="submit" name="button">Publish</button>
+</form>
 
 <!-- node.js - ejs - Layout Partials -->
 <%- include("partials/footer"); -%>
