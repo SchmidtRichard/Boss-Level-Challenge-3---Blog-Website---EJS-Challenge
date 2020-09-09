@@ -63,8 +63,15 @@ app.get("/compose", function(req, res) {
 //Catch the POST request made to the compose.ejs route
 app.post("/compose", function(req, res) {
 
-  //Log what has been entered in the title input in compose.ejs
-  console.log(req.body.postTitle);
+  //Create JS Object called post to store the title and the body message
+  const post = {
+    title: req.body.postTitle,
+    content: req.body.postBody
+  };
+
+  //Log what has been entered in the title and body input in compose.ejs
+  console.log("*************** Post Title ***************\n" + req.body.postTitle);
+  console.log("*************** Post Body ***************\n" + req.body.postBody);
 });
 
 //Set up the server to listen to port 3000
