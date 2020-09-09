@@ -4,8 +4,18 @@
 <h1>Compose</h1>
 
 <form class="createPost" action="/compose" method="post">
-  <input type="text" name="postTitle" autofocus>
-  <button type="submit" name="button">Publish</button>
+
+<div class="form-group">
+  <label>Title</label>
+  <input class="form-control" type="text" name="postTitle" autofocus>
+</div>
+
+  <div class="form-group">
+    <label>Post</label>
+    <textarea class="form-control" name="postBody" rows="15" cols="70"></textarea>
+  </div>
+
+  <button class="btn btn-primary" type="submit" name="button">Publish</button>
 </form>
 
 <!-- node.js - ejs - Layout Partials -->
