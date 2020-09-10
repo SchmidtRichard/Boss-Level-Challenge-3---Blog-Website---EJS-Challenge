@@ -34,7 +34,10 @@ app.get("/", function(req, res) {
   res.render("home", {
 
     //Render the text of the const homeStartingContent in the paragraph tag inside the home.ejs
-    startingContent: homeStartingContent
+    startingContent: homeStartingContent,
+
+    //Render the posts inside the home.ejs
+    myPosts: posts
   });
 });
 
@@ -80,12 +83,12 @@ app.post("/compose", function(req, res) {
   //Redirect the user back to the home page (/)
   res.redirect("/");
 
-  console.log("*************** POSTS ARRAY ***************");
-  console.log(posts);
+  // console.log("*************** POSTS ARRAY ***************");
+  // console.log(posts);
 
   //Log what has been entered in the title and body input in compose.ejs
-  console.log("*************** POST TITLE ***************\n" + req.body.postTitle);
-  console.log("*************** POST BODY ***************\n" + req.body.postBody);
+  // console.log("*************** POST TITLE ***************\n" + req.body.postTitle);
+  // console.log("*************** POST BODY ***************\n" + req.body.postBody);
 });
 
 //Set up the server to listen to port 3000
