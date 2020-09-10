@@ -5,12 +5,11 @@
 
 <p><%= startingContent %></p>
 
-
-
-<!-- Log the posts from the posts array -->
-<% console.log(myPosts); %>
-
-
+<!-- Loop through the array posts and console log the title for each post -->
+  <% for(var i = 0; i < myPosts.length; i++){ %>
+    <!-- console log the posts title (posts array contain post object and each has a key of title and content)-->
+      <% console.log(myPosts[i].title); %>
+  <% }; %>
 
 <!-- node.js - ejs - Layout Partials -->
 <%- include("partials/footer"); -%>
