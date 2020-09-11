@@ -7,7 +7,14 @@
 
   <!-- Loop through the array posts and console log the title for each post -->
   <% myPosts.forEach(function(post){ %>
-    <% console.log(post.title); %>
+
+    <!-- Render the posts title and content to the home page -->
+    <h1><%= post.title %> </h1>
+    <p><%= post.content %></p>
+
+    <!-- Console log the post title and content to the terminal -->
+    <% console.log(post.title + "\n"); %>
+    <% console.log(post.content + "\n"); %>
   <% }); %>
 
 <!-- node.js - ejs - Layout Partials -->
