@@ -93,7 +93,24 @@ app.post("/compose", function(req, res) {
 
 //Express Routing Parameters
 app.get("/posts/:postName", function(req, res) {
-  console.log(req.params.postName);
+  //Store the parameters entered by the user in a constant
+  const requestedTitle = req.params.postName;
+
+  //Loop through the posts array and check if the title in the array matches the parameters entered by the user on the URL
+  posts.forEach(function(post) {
+
+    //for each post it will save the title in storedTitle
+    const storedTitle = post.title;
+
+    //Check for each post wheather the storedTitle matches the requestedTitle
+    if (storedTitle === requestedTitle) {
+      console.log("Match found!");
+    } else {
+      console.log("Nope!");
+    }
+  });
+
+  //console.log(req.params.postName);
 });
 
 
