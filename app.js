@@ -10,7 +10,7 @@ const aboutContent = "Hac habitasse platea dictumst vestibulum rhoncus est pelle
 
 const contactContent = "Scelerisque eleifend donec pretium vulputate sapien. Rhoncus urna neque viverra justo nec ultrices. Arcu dui vivamus arcu felis bibendum. Consectetur adipiscing elit duis tristique. Risus viverra adipiscing at in tellus integer feugiat. Sapien nec sagittis aliquam malesuada bibendum arcu vitae. Consequat interdum varius sit amet mattis. Iaculis nunc sed augue lacus. Interdum posuere lorem ipsum dolor sit amet consectetur adipiscing elit. Pulvinar elementum integer enim neque. Ultrices gravida dictum fusce ut placerat orci nulla. Mauris in aliquam sem fringilla ut morbi tincidunt. Tortor posuere ac ut consequat semper viverra nam libero.";
 
-//Initialize a new express app
+//Create a new app using express
 const app = express();
 
 //Tell the app to use EJS as its view engine
@@ -90,6 +90,19 @@ app.post("/compose", function(req, res) {
   // console.log("*************** POST TITLE ***************\n" + req.body.postTitle);
   // console.log("*************** POST BODY ***************\n" + req.body.postBody);
 });
+
+//Express Routing Parameters
+app.get("/posts/:postName", function(req, res) {
+  console.log(req.params.postName);
+});
+
+
+
+
+
+
+
+
 
 //Set up the server to listen to port 3000
 app.listen(3000, function() {
