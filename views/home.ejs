@@ -10,7 +10,7 @@
 
     <!-- Render the posts title and content to the home page -->
     <h1><%= post.title %> </h1>
-    <p><%= post.content %></p>
+    <p><%= post.content.substring(0, 100) + " ..." %></p>
 
     <!-- Console log the post title and content to the terminal -->
     <% console.log(post.title); %>
