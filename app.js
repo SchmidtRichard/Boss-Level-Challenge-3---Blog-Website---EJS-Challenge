@@ -96,6 +96,7 @@ app.post("/compose", function(req, res) {
 
 //Express Routing Parameters
 app.get("/posts/:postName", function(req, res) {
+
   //Store the parameters entered by the user in a constant
   const requestedTitle = _.lowerCase(req.params.postName);
 
@@ -107,21 +108,20 @@ app.get("/posts/:postName", function(req, res) {
 
     //Check for each post wheather the storedTitle matches the requestedTitle
     if (storedTitle === requestedTitle) {
-      console.log("Match found!");
-    } else {
-      console.log("Nope!");
-    }
+
+      //Render the post.ejs page and pass over the title and content regarding a post
+      res.render("post", {
+        title: post.title,
+        content: post.content
+      });
+
+      //console.log("Match found!");
+    } //else {
+    //console.log("Nope!");
+    //}
   });
   //console.log(req.params.postName);
 });
-
-
-
-
-
-
-
-
 
 //Set up the server to listen to port 3000
 app.listen(3000, function() {
