@@ -10,7 +10,13 @@
 
     <!-- Render the posts title and content to the home page -->
     <h1><%= post.title %> </h1>
-    <p><%= post.content.substring(0, 100) + " ..." %></p>
+    <p>
+      <!-- Truncate the content using JS method substring -->
+      <%= post.content.substring(0, 100) + " ... " %>
+
+      <!-- Allow the user to click on the read more and redirect him to the specific blog page -->
+      <a href="/posts/<%= post.title %>">Read More</a>
+    </p>
 
     <!-- Console log the post title and content to the terminal -->
     <% console.log(post.title); %>
