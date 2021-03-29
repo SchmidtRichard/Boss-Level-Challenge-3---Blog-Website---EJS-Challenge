@@ -4,8 +4,18 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const ejs = require("ejs");
 
+
+//***** Boss Level Challenge - Blog Website Upgrade *****//
+//Require Mongoose package that have just been installed
+const mongoose = require("mongoose");
+
+
+
+
 // lodash - Load the full build.
 const _ = require('lodash');
+
+
 
 const homeStartingContent = "Lacus vel facilisis volutpat est velit egestas dui id ornare. Semper auctor neque vitae tempus quam. Sit amet cursus sit amet dictum sit amet justo. Viverra tellus in hac habitasse. Imperdiet proin fermentum leo vel orci porta. Donec ultrices tincidunt arcu non sodales neque sodales ut. Mattis molestie a iaculis at erat pellentesque adipiscing. Magnis dis parturient montes nascetur ridiculus mus mauris vitae ultricies. Adipiscing elit ut aliquam purus sit amet luctus venenatis lectus. Ultrices vitae auctor eu augue ut lectus arcu bibendum at. Odio euismod lacinia at quis risus sed vulputate odio ut. Cursus mattis molestie a iaculis at erat pellentesque adipiscing.";
 
@@ -27,6 +37,30 @@ app.use(bodyParser.urlencoded({
 //Tell the app to use all the statics files inside the public folder
 app.use(express.static("public"));
 
+
+
+
+
+//***** Boss Level Challenge - Blog Website Upgrade *****//
+//Create a new DB inside mongoDB called blogDB
+//Connect to the new URL where mongoDB is hosted locally (usually localhost:27017)
+mongoose.connect("mongodb://localhost:27017/blogDB", {
+  useNewUrlParser: true
+});
+
+//Create the postSchema for the mongoDB
+const postSchema = {
+  title: String,
+  content: String
+};
+
+//Create a new mongoose model (Post) using the Postschema to define the posts collection (posts)
+const Post = mongoose.model("Post", postSchema);
+
+
+
+
+
 //Global variable posts to store all the posts (title and content) in the array
 let posts = [];
 
@@ -44,26 +78,6 @@ app.get("/", function(req, res) {
   });
 });
 
-//Create the route to the about.ejs page
-app.get("/about", function(req, res) {
-
-  //Render the about.ejs file (page)
-  res.render("about", {
-    //Render the text of the const aboutContent in the paragraph tag inside the about.ejs
-    aboutText: aboutContent
-  });
-});
-
-//Create the route to the contact.ejs page
-app.get("/contact", function(req, res) {
-
-  //Render the contact.ejs file (page)
-  res.render("contact", {
-    //Render the text of the const contactContent in the paragraph tag inside the contact.ejs
-    contactText: contactContent
-  });
-});
-
 //Create the route to the compose.ejs page
 app.get("/compose", function(req, res) {
 
@@ -75,13 +89,29 @@ app.get("/compose", function(req, res) {
 app.post("/compose", function(req, res) {
 
   //Create JS Object called post to store the title and the body message
-  const post = {
+  // const post = {
+  //   title: req.body.postTitle,
+  //   content: req.body.postBody
+  // };
+
+
+
+
+  //***** Boss Level Challenge - Blog Website Upgrade *****//
+  //Create a new post document using the mongoose model
+  const post = new Post({
     title: req.body.postTitle,
     content: req.body.postBody
-  };
+  });
+
+  //Save the document to the DB instead of pushing it ot the posts array
+  post.save();
+
+
+
 
   //Append the posts (title and content) to the posts array (global variable)
-  posts.push(post);
+  //posts.push(post);
 
   //Redirect the user back to the home page (/)
   res.redirect("/");
@@ -93,6 +123,9 @@ app.post("/compose", function(req, res) {
   // console.log("*************** POST TITLE ***************\n" + req.body.postTitle);
   // console.log("*************** POST BODY ***************\n" + req.body.postBody);
 });
+
+
+
 
 //Express Routing Parameters
 app.get("/posts/:postName", function(req, res) {
@@ -121,6 +154,26 @@ app.get("/posts/:postName", function(req, res) {
     //}
   });
   //console.log(req.params.postName);
+});
+
+//Create the route to the about.ejs page
+app.get("/about", function(req, res) {
+
+  //Render the about.ejs file (page)
+  res.render("about", {
+    //Render the text of the const aboutContent in the paragraph tag inside the about.ejs
+    aboutText: aboutContent
+  });
+});
+
+//Create the route to the contact.ejs page
+app.get("/contact", function(req, res) {
+
+  //Render the contact.ejs file (page)
+  res.render("contact", {
+    //Render the text of the const contactContent in the paragraph tag inside the contact.ejs
+    contactText: contactContent
+  });
 });
 
 //Set up the server to listen to port 3000
