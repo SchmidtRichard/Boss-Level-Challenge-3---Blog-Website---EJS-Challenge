@@ -110,90 +110,113 @@ app.get("/compose", function(req, res) {
   res.render("compose");
 });
 
+
+
+
+
+
+//***** Boss Level Challenge - Blog Website Upgrade *****//
+//***** Render the correct blog post based on post _id *****//
+//In the app.post() method for the /post route, you should change the express route parameter to postId instead.
+
 //Catch the POST request made to the compose.ejs route
 app.post("/compose", function(req, res) {
 
   //Create JS Object called post to store the title and the body message
-  // const post = {
-  //   title: req.body.postTitle,
-  //   content: req.body.postBody
-  // };
-
-
-
-
-  //***** Boss Level Challenge - Blog Website Upgrade *****//
-  //***** Save Composed Posts with MongoDB *****//
-  //Create a new post document using the mongoose model
-  const post = new Post({
+  const post = {
     title: req.body.postTitle,
     content: req.body.postBody
-  });
+
+  };
+
+
+
+  //You can use the findOne() method to find the post with a matching id in the posts collection.
+  // Post.findOne({
+  //   _id: requestedPostId
+  // }, function(err, post) {
 
 
 
 
   //***** Boss Level Challenge - Blog Website Upgrade *****//
-  //***** Get the Home Page to Render the Posts *****//
+  //***** Fix the Bug *****//
   //Callback to the save method to only redirect to the home page once save is complete with no errors
   post.save(function(err) {
     if (!err) {
       res.redirect("/");
     }
   });
-
-
-
-
-  //Save the document to the DB instead of pushing it ot the posts array
-  //post.save();
-
-
-
-
-  //Append the posts (title and content) to the posts array (global variable)
-  //posts.push(post);
-
-  //Redirect the user back to the home page (/)
-  //res.redirect("/");
-
-  // console.log("*************** POSTS ARRAY ***************");
-  // console.log(posts);
-
-  //Log what has been entered in the title and body input in compose.ejs
-  // console.log("*************** POST TITLE ***************\n" + req.body.postTitle);
-  // console.log("*************** POST BODY ***************\n" + req.body.postBody);
 });
 
+//Save the document to the DB instead of pushing it ot the posts array
+//post.save();
 
 
+//Append the posts (title and content) to the posts array (global variable)
+//posts.push(post);
+
+//Redirect the user back to the home page (/)
+//res.redirect("/");
+
+// console.log("*************** POSTS ARRAY ***************");
+// console.log(posts);
+
+//Log what has been entered in the title and body input in compose.ejs
+// console.log("*************** POST TITLE ***************\n" + req.body.postTitle);
+// console.log("*************** POST BODY ***************\n" + req.body.postBody);
+
+
+
+
+
+
+//***** Boss Level Challenge - Blog Website Upgrade *****//
+//***** Render the correct blog post based on post _id *****//
 
 //Express Routing Parameters
-app.get("/posts/:postName", function(req, res) {
+app.get("/posts/:postId", function(req, res) {
 
   //Store the parameters entered by the user in a constant
-  const requestedTitle = _.lowerCase(req.params.postName);
+  const requestedPostId = req.params.postId;
 
-  //Loop through the posts array and check if the title in the array matches the parameters entered by the user on the URL
-  posts.forEach(function(post) {
 
-    //for each post it will save the title in storedTitle
-    const storedTitle = _.lowerCase(post.title);
-
-    //Check for each post wheather the storedTitle matches the requestedTitle
-    if (storedTitle === requestedTitle) {
-
-      //Render the post.ejs page and pass over the title and content regarding a post
-      res.render("post", {
-        title: post.title,
-        content: post.content
-      });
-
-      //console.log("Match found!");
-    } //else {
-    //console.log("Nope!");
-    //}
+  //***** Boss Level Challenge - Blog Website Upgrade *****//
+  //***** Save Composed Posts with MongoDB *****//
+  //Create a new post document using the mongoose model
+  Post.findOne({
+    _id: requestedPostId
+  }, function(err, post) {
+    res.render("post", {
+      title: post.title,
+      content: post.content
+    });
   });
+
+
+
+
+
+  // //Loop through the posts array and check if the title in the array matches the parameters entered by the user on the URL
+  // posts.forEach(function(post) {
+  //
+  //   //for each post it will save the title in storedTitle
+  //   const storedTitle = _.lowerCase(post.title);
+  //
+  //   //Check for each post wheather the storedTitle matches the requestedTitle
+  //   if (storedTitle === requestedTitle) {
+  //
+  //     //Render the post.ejs page and pass over the title and content regarding a post
+  //     res.render("post", {
+  //       title: post.title,
+  //       content: post.content
+  //     });
+  //
+  //     //console.log("Match found!");
+  //   } //else {
+  //   //console.log("Nope!");
+  //   //}
+  // });
   //console.log(req.params.postName);
 });
 

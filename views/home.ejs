@@ -14,9 +14,19 @@
       <!-- Truncate the content using JS method substring -->
       <%= post.content.substring(0, 100) + " ... " %>
 
+
+
+
       <!-- Allow the user to click on the read more and redirect him to the specific blog page -->
-      <a href="/posts/<%= post.title %>">Read More</a>
+
+      <!--   ***** Boss Level Challenge - Blog Website Upgrade *****
+  ***** Render the correct blog post based on post _id ***** -->
+    <!-- In home.ejs you’ll need to change the href of the anchor tag based on the post id instead of the post name -->
+      <a href="/posts/<%= post._id %>">Read More</a>
     </p>
+
+
+
 
     <!-- Console log the post title and content to the terminal -->
     <% console.log(post.title); %>
