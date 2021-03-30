@@ -130,8 +130,23 @@ app.post("/compose", function(req, res) {
     content: req.body.postBody
   });
 
+
+
+
+  //***** Boss Level Challenge - Blog Website Upgrade *****//
+  //***** Get the Home Page to Render the Posts *****//
+  //Callback to the save method to only redirect to the home page once save is complete with no errors
+  post.save(function(err) {
+    if (!err) {
+      res.redirect("/");
+    }
+  });
+
+
+
+
   //Save the document to the DB instead of pushing it ot the posts array
-  post.save();
+  //post.save();
 
 
 
@@ -140,7 +155,7 @@ app.post("/compose", function(req, res) {
   //posts.push(post);
 
   //Redirect the user back to the home page (/)
-  res.redirect("/");
+  //res.redirect("/");
 
   // console.log("*************** POSTS ARRAY ***************");
   // console.log(posts);
