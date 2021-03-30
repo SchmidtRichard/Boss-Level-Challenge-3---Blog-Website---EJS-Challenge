@@ -6,6 +6,7 @@ const ejs = require("ejs");
 
 
 //***** Boss Level Challenge - Blog Website Upgrade *****//
+//***** Save Composed Posts with MongoDB *****//
 //Require Mongoose package that have just been installed
 const mongoose = require("mongoose");
 
@@ -42,6 +43,7 @@ app.use(express.static("public"));
 
 
 //***** Boss Level Challenge - Blog Website Upgrade *****//
+//***** Save Composed Posts with MongoDB *****//
 //Create a new DB inside mongoDB called blogDB
 //Connect to the new URL where mongoDB is hosted locally (usually localhost:27017)
 mongoose.connect("mongodb://localhost:27017/blogDB", {
@@ -59,23 +61,46 @@ const Post = mongoose.model("Post", postSchema);
 
 
 
-
-
+//***** Boss Level Challenge - Blog Website Upgrade *****//
+//***** Get the Home Page to Render the Posts *****//
 //Global variable posts to store all the posts (title and content) in the array
-let posts = [];
+//let posts = [];
 
 //Create the first get route on the home route
 app.get("/", function(req, res) {
 
-  //Render the home.ejs file (page)
-  res.render("home", {
 
-    //Render the text of the const homeStartingContent in the paragraph tag inside the home.ejs
-    startingContent: homeStartingContent,
 
-    //Render the posts inside the home.ejs
-    myPosts: posts
+  //***** Boss Level Challenge - Blog Website Upgrade *****//
+  //***** Get the Home Page to Render the Posts *****//
+  Post.find({}, function(err, posts) {
+
+
+    //Render the home.ejs file (page)
+    res.render("home", {
+
+      //Render the text of the const homeStartingContent in the paragraph tag inside the home.ejs
+      startingContent: homeStartingContent,
+
+      //Render the posts inside the home.ejs
+      myPosts: posts
+    });
+
   });
+
+
+  // //Render the home.ejs file (page)
+  // res.render("home", {
+  //
+  //   //Render the text of the const homeStartingContent in the paragraph tag inside the home.ejs
+  //   startingContent: homeStartingContent,
+  //
+  //   //Render the posts inside the home.ejs
+  //   myPosts: posts
+  // });
+
+
+
 });
 
 //Create the route to the compose.ejs page
@@ -98,6 +123,7 @@ app.post("/compose", function(req, res) {
 
 
   //***** Boss Level Challenge - Blog Website Upgrade *****//
+  //***** Save Composed Posts with MongoDB *****//
   //Create a new post document using the mongoose model
   const post = new Post({
     title: req.body.postTitle,
