@@ -123,21 +123,11 @@ app.get("/compose", function(req, res) {
 app.post("/compose", function(req, res) {
 
   //Create JS Object called post to store the title and the body message
-  const post = {
+  const post = new Post({
     title: req.body.postTitle,
     content: req.body.postBody
 
-  };
-
-
-
-  //You can use the findOne() method to find the post with a matching id in the posts collection.
-  // Post.findOne({
-  //   _id: requestedPostId
-  // }, function(err, post) {
-
-
-
+  });
 
   //***** Boss Level Challenge - Blog Website Upgrade *****//
   //***** Fix the Bug *****//
@@ -147,6 +137,14 @@ app.post("/compose", function(req, res) {
       res.redirect("/");
     }
   });
+
+
+
+  //You can use the findOne() method to find the post with a matching id in the posts collection.
+  // Post.findOne({
+  //   _id: requestedPostId
+  // }, function(err, post) {
+
 });
 
 //Save the document to the DB instead of pushing it ot the posts array
